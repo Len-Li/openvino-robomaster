@@ -1,4 +1,4 @@
-# [CPU+目标检测] openvino遇上robomaster自瞄（开源模型）
+# [CPU+目标检测+100FPS] openvino遇上robomaster自瞄（开源模型）
 
 ## 0．introduction
 在robomaster比赛中，选手往往使用颜色分离，提取轮廓，匹配轮廓的方式来识别装甲板，但往往会花费大量时间在现场调整参数，于是我们想：能否利用深度学习来做自瞄以提高其鲁棒性？但深度学习算法在实时性上通常表现不好，在1080ti这样的显卡才能达到实时，但没人会在机器人上带一个煤气灶吧。很多人会想到使用Tensor RT，或者模型剪枝/压缩，低比特推理的方式提高深度学习算法在GPU上的速度，但很多人没有想到使用纯CPU也能实时运行神经网络。凭借Intel团队发布的openvino，我们可以在Intel CPU或者计算棒上实时运行目标检测算法，大大提高了robomaster自瞄的上界。在这里我们以CPU+计算棒的方式介绍完整的实现步骤。
@@ -7,13 +7,9 @@ How it works？
 1. 训练自己的模型或者使用官方的demo
 2. 将模型转换至中间表示层
 3. 部署
-
-  
-
 ![img](image/vio.png)
-  根据官网上的信息，openvino对TensorFlow支持的最好，所以我们这里以谷歌的模型库为示例，走通上述的pipeline。
-  ![](image/demo.gif)
-
+根据官网上的信息，openvino对TensorFlow支持的最好，所以我们这里以谷歌的模型库为示例，走通上述的pipeline。我们的方法在i5 8250u上以400*300的分辨率运行可以达到100+FPS。
+![img](image/demo.gif)
 <center>检测demo</center>
 
 ## 1．使用TensorFlow Object Detection API 训练自己的模型（以robomaster数据集为例）
