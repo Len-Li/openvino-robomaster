@@ -7,9 +7,13 @@ How it works？
 1. 训练自己的模型或者使用官方的demo
 2. 将模型转换至中间表示层
 3. 部署
+
+  
+
 ![img](image/vio.png)
-根据官网上的信息，openvino对TensorFlow支持的最好，所以我们这里以谷歌的模型库为示例，走通上述的pipeline。
-![](image/demo.gif)
+  根据官网上的信息，openvino对TensorFlow支持的最好，所以我们这里以谷歌的模型库为示例，走通上述的pipeline。
+  ![](image/demo.gif)
+
 <center>检测demo</center>
 
 ## 1．使用TensorFlow Object Detection API 训练自己的模型（以robomaster数据集为例）
